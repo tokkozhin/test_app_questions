@@ -35,14 +35,14 @@ const Navigator = () => {
         if (result) {
           dispatch({type: 'SET_USER', payload: JSON.parse(result)});
         }
-        console.log(result);
+        // console.log(result);
       } catch (err) {
         console.log(err);
       }
     };
     checkAuth();
   }, []);
-  console.log(state);
+  //console.log(state);
   return (
     <NavigationContainer theme={theme}>
       {state.user ? (

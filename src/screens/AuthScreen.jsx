@@ -6,7 +6,7 @@ import VKLogin from 'react-native-vkontakte-login';
 import {Context} from 'src/store';
 
 const AuthScreen = () => {
-  const {dispatch} = useContext(Context);
+  const {state, dispatch} = useContext(Context);
 
   const onPressAuth = useCallback(() => {
     const authVK = async () => {

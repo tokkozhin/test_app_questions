@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   answerNumber: {
     height: HEIGHT_FLIP,
     fontSize: 46,
+    lineHeight: HEIGHT_FLIP,
     color: '#ddd',
     fontWeight: 'bold',
     position: 'absolute',

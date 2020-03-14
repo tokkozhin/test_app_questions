@@ -8,7 +8,7 @@ const initialState = {
 
 // REDUCER
 const reducer = (state, action) => {
-  console.log(action);
+  //console.log(action);
   switch (action.type) {
     case 'SET_USER':
       AsyncStorage.setItem('@user', JSON.stringify(action.payload));
