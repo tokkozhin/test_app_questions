@@ -7,7 +7,7 @@ Test application with interesting animation & VK authorization =)
 First of all you need to download repo on your local machine:
 
 ```
-$ git clone git@github.com:HeyMaslo/expo-start-to-standalone.git
+$ git clone https://github.com/tokkozhin/test_app_questions.git
 ```
 Go to the repo:
 ```
