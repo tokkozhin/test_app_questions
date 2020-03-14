@@ -33,3 +33,9 @@ export const filterError = error => {
 export const getQuestionsList = () => {
   return app.get('8561o');
 };
+
+export const getVKFullName = (user_id, access_token) => {
+  return axios.get(
+    `https://api.vk.com/method/users.get?user_id=${user_id}&v=5.52&access_token=${access_token}`,
+  );
+};

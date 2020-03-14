@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, FlatList, Alert} from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import {StyleSheet, View, FlatList, Alert, Text} from 'react-native';
 import * as Api from 'src/core/api';
 // components
 import QuestionItem from 'src/components/QuestionItem';
 import BottomMenu from 'src/components/BottomMenu';
 // store
-// import {Context} from 'src/store';
+import {Context} from 'src/store';
 
 const QuestionsListScreen = ({navigation}) => {
-  // const {dispatch} = useContext(Context);
+  const {state} = useContext(Context);
   const [list, setList] = useState();
   const [loading, load] = useState(true);
 
@@ -48,6 +48,12 @@ const QuestionsListScreen = ({navigation}) => {
     />
   );
 
+  const ListHeaderComponent = () => {
+    return state.user?.first_name ? (
+      <Text style={styles.hello}>Привет, {state.user.first_name}!</Text>
+    ) : null;
+  };
+
   return (
     <View style={styles.main}>
       <FlatList
@@ -56,6 +62,7 @@ const QuestionsListScreen = ({navigation}) => {
         keyExtractor={item => item.title}
         refreshing={loading}
         onRefresh={() => getQuestionsList()}
+        ListHeaderComponent={ListHeaderComponent}
       />
       <BottomMenu />
     </View>
@@ -66,6 +73,13 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: 'transparent',
     flex: 1,
+  },
+  hello: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'steelblue',
+    padding: 20,
   },
 });
 

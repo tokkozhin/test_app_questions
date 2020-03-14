@@ -1,5 +1,7 @@
 import React, {useCallback, useContext} from 'react';
-import {StyleSheet, View, Button} from 'react-native';
+import {StyleSheet, View, Button, Alert} from 'react-native';
+import * as Api from 'src/core/api';
+import VKLogin from 'react-native-vkontakte-login';
 // store
 import {Context} from 'src/store';
 
@@ -7,7 +9,24 @@ const AuthScreen = () => {
   const {dispatch} = useContext(Context);
 
   const onPressAuth = useCallback(() => {
-    dispatch({type: 'SET_USER', payload: {login: 'login'}});
+    const authVK = async () => {
+      try {
+        const auth = await VKLogin.login(['email']);
+        if (auth) {
+          const fullName = await Api.getVKFullName(
+            auth.user_id,
+            auth.access_token,
+          );
+          dispatch({
+            type: 'SET_USER',
+            payload: {...fullName.data.response[0], ...auth},
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    authVK();
   }, [dispatch]);
 
   return (

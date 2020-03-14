@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 // screens
@@ -25,7 +26,22 @@ const screenOptions = {
 };
 
 const Navigator = () => {
-  const {state} = useContext(Context);
+  const {state, dispatch} = useContext(Context);
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        // const isLoggedIn = await VKLogin.isLoggedIn();
+        const result = await AsyncStorage.getItem('@user');
+        if (result) {
+          dispatch({type: 'SET_USER', payload: JSON.parse(result)});
+        }
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    checkAuth();
+  }, []);
   console.log(state);
   return (
     <NavigationContainer theme={theme}>
