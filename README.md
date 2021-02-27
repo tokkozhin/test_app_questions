@@ -17,6 +17,10 @@ And install dependencies:
 ```
 $ npm install
 ```
+or with yarn
+```
+$ yarn install
+```
 Now, you can run the project on iOS:
 ```
 $ npx react-native run-ios
